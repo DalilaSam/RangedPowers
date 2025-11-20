@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Tuple, Optional
 
 
 def letterCounter(text: str) -> Dict[str, int]:
@@ -23,3 +23,10 @@ def sentencesCounter(text: str) -> int:
     sentences = re.split(r'[.!?]+', text)
     sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
     return len(sentences)
+
+def mostCommonWord(text: str) -> Tuple[Optional[str], int]:
+    words = wordCounter(text)
+    if not words:
+        return None, 0
+    most_common_word = max(words, key=words.get)
+    return most_common_word, words[most_common_word]
