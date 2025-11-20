@@ -17,3 +17,9 @@ def wordCounter(text: str) -> Dict[str, int]:
         word = word.strip('.,!?;"\'()[]{}')
         counter[word] = counter.get(word, 0) + 1
     return counter
+
+def sentencesCounter(text: str) -> int:
+    import re
+    sentences = re.split(r'[.!?]+', text)
+    sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+    return len(sentences)
