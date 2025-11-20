@@ -8,3 +8,12 @@ def letterCounter(text: str) -> Dict[str, int]:
             letter = letter.lower()
             counter[letter] = counter.get(letter, 0) + 1
     return counter
+
+def wordCounter(text: str) -> Dict[str, int]:
+    text = text.lower()
+    words = text.split()
+    counter: Dict[str, int] = {}
+    for word in words:
+        word = word.strip('.,!?;"\'()[]{}')
+        counter[word] = counter.get(word, 0) + 1
+    return counter
