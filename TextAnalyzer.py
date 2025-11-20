@@ -2,6 +2,15 @@ from typing import Dict, Tuple, Optional
 
 
 def letterCounter(text: str) -> Dict[str, int]:
+    """
+    Count the frequency of each letter in the given text.
+    This function ignores non-letter characters and transforms all letters
+    to lowercase. Each occurrence of a letter increments its count.
+    Parameters:
+        text (str): The input text to analyze.
+    Returns:
+        Dict[str, int]: A dictionary mapping each letter to its frequency.
+    """
     counter: Dict[str, int] = {}
     for letter in text:
         if letter.isalpha():
@@ -10,6 +19,15 @@ def letterCounter(text: str) -> Dict[str, int]:
     return counter
 
 def wordCounter(text: str) -> Dict[str, int]:
+    """
+    Count the frequency of each word in the given text.
+    The function transforms all text to lowercase, splits it into words,
+    removes punctuation from each word, and counts occurrences.
+    Parameters:
+        text (str): The input text to analyze.
+    Returns:
+        Dict[str, int]: A dictionary mapping each word to its frequency.
+    """
     text = text.lower()
     words = text.split()
     counter: Dict[str, int] = {}
@@ -19,12 +37,32 @@ def wordCounter(text: str) -> Dict[str, int]:
     return counter
 
 def sentencesCounter(text: str) -> int:
+    """
+    Count the number of sentences in the given text.
+    The function uses regular expressions to split the text by punctuation
+    marks that typically end a sentence (period, exclamation mark, question mark).
+    Empty entries are filtered out.
+    Parameters:
+        text (str): The input text to analyze.
+    Returns:
+        int: The total number of detected sentences.
+    """
     import re
     sentences = re.split(r'[.!?]+', text)
     sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
     return len(sentences)
 
 def mostCommonWord(text: str) -> Tuple[Optional[str], int]:
+    """
+    Find the most common word in the given text.
+    The function uses `wordCounter()` to get word frequencies,
+    then returns the word with the highest frequency along with its count.
+    Parameters:
+        text (str): The input text to analyze.
+    Returns:
+        Tuple[Optional[str], int]: The most frequent word and its occurrence count.
+                                   Returns (None, 0) if no words exist.
+    """
     words = wordCounter(text)
     if not words:
         return None, 0
@@ -32,6 +70,16 @@ def mostCommonWord(text: str) -> Tuple[Optional[str], int]:
     return most_common_word, words[most_common_word]
 
 def result(text: str) -> None:
+    """
+    Display the results of the text analysis.
+    This includes:
+      - Letter frequency
+      - Word frequency
+      - Sentence count
+      - Most common word and its frequency
+    Parameters:
+        text (str): The text to analyze.
+    """
     letters = letterCounter(text)
     words = wordCounter(text)
     sentences = sentencesCounter(text)
